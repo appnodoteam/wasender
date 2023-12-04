@@ -27,7 +27,7 @@ class NumberController extends Controller
      */
     public function store(StoreNumberRequest $request)
     {
-       return $this->ctrl->store($request);
+
     }
 
     /**
