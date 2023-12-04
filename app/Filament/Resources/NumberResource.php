@@ -67,6 +67,11 @@ class NumberResource extends Resource
                     ->relationship('user', 'name')
                     ->placeholder(__('User ID')),
 
+                Forms\Components\TextInput::make('api_version')
+                    ->label(__('API Version'))
+                    ->default('v1')
+                    ->placeholder(__('API Version')),
+
                 Forms\Components\Toggle::make('save_messages')
                     ->label(__('Guardar mensajes'))
                     ->default(false),
@@ -74,6 +79,7 @@ class NumberResource extends Resource
                 Forms\Components\Toggle::make('save_media')
                     ->label(__('Guardar multimedia/archivos'))
                     ->default(false),
+
 
                 Forms\Components\Textarea::make('token')
                     ->columnSpan(3)

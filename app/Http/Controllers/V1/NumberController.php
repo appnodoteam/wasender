@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\V1;
 
+use App\Helpers\Sender;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNumberRequest;
 use App\Http\Requests\UpdateNumberRequest;
+use App\Jobs\SendMessageTextJob;
 use App\Models\V1\Number;
 
 class NumberController extends Controller
@@ -22,7 +24,14 @@ class NumberController extends Controller
      */
     public function store(StoreNumberRequest $request)
     {
-        //
+
+
+        SendMessageTextJob::dispatch($request->number, $request->destination, $request->message);
+
+        return response()->json([
+            'message' => 'Message added to queue'
+        ]);
+
     }
 
     /**

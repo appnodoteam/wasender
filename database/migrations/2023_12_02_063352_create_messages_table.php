@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger("number_id");
             $table->foreign("number_id")->references("id")->on("numbers");
             $table->string("status", 20)->default("pending");
-            $table->string("messages_id", 50)->nullable();
             $table->json("response")->nullable();
             $table->timestamps();
             $table->softDeletes();

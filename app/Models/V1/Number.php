@@ -23,6 +23,7 @@ class Number extends Model
         'save_messages',
         'save_media',
         'name',
+        'api_version'
     ];
 
     protected $casts = [

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V1\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\V1\NumberController as NumberControllerOrigin;
+use App\Http\Requests\StoreNumberRequest;
 use Illuminate\Http\Request;
 
 class NumberController extends Controller
@@ -24,9 +25,9 @@ class NumberController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreNumberRequest $request)
     {
-        //
+       return $this->ctrl->store($request);
     }
 
     /**

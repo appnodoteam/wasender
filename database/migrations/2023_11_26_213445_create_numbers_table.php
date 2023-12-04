@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("number_id",50)->nullable();
             $table->string("waba_id",50)->nullable();
             $table->longText("token")->nullable();
+            $table->string("api_version",10)->default("v1");
             $table->string("status",20)->default("inactive");
             $table->string("name",100)->nullable();
             $table->unsignedBigInteger("user_id")->nullable();

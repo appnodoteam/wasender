@@ -19,6 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::group(["prefix"=> "v1"], function(){
+Route::group(["prefix"=> "v2"], function(){
     Route::apiResource("numbers", \App\Http\Controllers\V1\Api\NumberController::class);
+
+    Route::post("send-text", [\App\Http\Controllers\V1\Api\SendMessagesController::class, "sendText"]);
+    Route::post("send-template", [\App\Http\Controllers\V1\Api\SendMessagesController::class, "sendTemplate"]);
+    Route::post("send-document", [\App\Http\Controllers\V1\Api\SendMessagesController::class, "sendDocument"]);
+    Route::post("send-document-link", [\App\Http\Controllers\V1\Api\SendMessagesController::class, "sendDocumentLink"]);
 });
