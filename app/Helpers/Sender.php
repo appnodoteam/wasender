@@ -7,6 +7,7 @@ use App\Models\V1\Message;
 use App\Models\V1\Number;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class Sender
 {
@@ -52,13 +53,19 @@ class Sender
             }'.$comps.'
           }
         }';
-        Log::info($body);
         $sender = new self();
         $sender->useApi('POST', $url, $body, $headers, "template: ".$template, $number);
     }
 
     public static function sendDocumentLink(Number $number, $destination, $link, $caption, $filename) : void
     {
+        Log::warning("sendDocumentLink", [
+            'number' => $number->id,
+            'destination' => $destination,
+            'link' => $link,
+            'caption' => $caption,
+            'filename' => $filename,
+        ]);
         $url = 'https://graph.facebook.com/'.$number->api_version.'/'.$number->number_id.'/messages';
         $headers = [
             'Content-Type' => 'application/json',

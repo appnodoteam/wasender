@@ -41,17 +41,28 @@ class SendMessagesController extends Controller
 
     public function sendDocument(SendDocumentRequest $request)
     {
-        $path = $request->file('document')->store('documents');
-        $url = asset($path);
-        $filename = $request->file('document')->getClientOriginalName();
-        $caption = $request->caption??$filename;
+        $file = $request->file('document');
+        $file->storeAs('public/documents', $file->getClientOriginalName());
+        $public_url = asset('storage/documents/'.$file->getClientOriginalName());
 
-        SendMessageDocumentLinkJob::dispatch($request->number, $request->destination, $url, $caption, $filename);
+        SendMessageDocumentLinkJob::dispatch(
+            $request->number,
+            $request->destination,
+            $public_url,
+            $request->caption ?? $file->getClientOriginalName(),
+            $file->getClientOriginalName()
+        );
+        return response()->json([
+            'message' => 'Message added to queue'
+        ]);
     }
 
     public function sendDocumentLink(SendDocumentLinkRequest $request)
     {
         SendMessageDocumentLinkJob::dispatch($request->number, $request->destination, $request->link, $request->caption, $request->filename);
+        return response()->json([
+            'message' => 'Message added to queue'
+        ]);
     }
 
     public function sendLocation(Request $request)
