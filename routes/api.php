@@ -26,4 +26,5 @@ Route::group(["prefix"=> "v2"], function(){
     Route::post("send-template", [\App\Http\Controllers\V1\Api\SendMessagesController::class, "sendTemplate"]);
     Route::post("send-document", [\App\Http\Controllers\V1\Api\SendMessagesController::class, "sendDocument"]);
     Route::post("send-document-link", [\App\Http\Controllers\V1\Api\SendMessagesController::class, "sendDocumentLink"]);
+    Route::post("send-otp", [\App\Http\Controllers\V1\Api\SendMessagesController::class, "sendOTP"]);
 });
