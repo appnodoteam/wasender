@@ -5,13 +5,15 @@ namespace App\Http\Controllers\V1\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\V1\NumberController as NumberControllerOrigin;
 use App\Http\Requests\StoreNumberRequest;
+use App\Http\Requests\UpdateNumberRequest;
 use Illuminate\Http\Request;
+
 
 class NumberController extends Controller
 {
-    public $ctrl;
-    public function __construct(){
-        $this->ctrl = new NumberControllerOrigin();
+    protected $ctrl;
+    public function __construct(NumberControllerOrigin $ctrl){
+        $this->ctrl = $ctrl;
     }
 
     /**
@@ -27,6 +29,8 @@ class NumberController extends Controller
      */
     public function store(StoreNumberRequest $request)
     {
+        $res = $this->ctrl->store($request);
+        return response()->json($res, $res["code"]);
 
     }
 
@@ -41,9 +45,11 @@ class NumberController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateNumberRequest $request, string $id)
     {
-        //
+        $res = $this->ctrl->update($request, $id);
+        return response()->json($res, $res["code"]);
+
     }
 
     /**
@@ -51,6 +57,7 @@ class NumberController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $res = $this->ctrl->destroy($id);
+        return response()->json($res, $res["code"]);
     }
 }

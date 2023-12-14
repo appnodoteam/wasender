@@ -23,7 +23,7 @@ class SendMessageTextJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(string $number, string $destination, string $message)
+    public function __construct(Number $number, string $destination, string $message)
     {
         $this->number = $number;
         $this->destination = $destination;
@@ -36,7 +36,6 @@ class SendMessageTextJob implements ShouldQueue
     public function handle(): void
     {
         $sender = new Sender();
-        $number = Number::find($this->number);
-        $sender->sendText($number, $this->destination, $this->message);
+        $sender->sendText($this->number, $this->destination, $this->message);
     }
 }

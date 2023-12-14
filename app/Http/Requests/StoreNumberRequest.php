@@ -21,10 +21,17 @@ class StoreNumberRequest extends FormRequest
      */
     public function rules(): array
     {
+        // regex, numbers only
         return [
-            'destination' => 'required|string',
-            'message' => 'required|string',
-            'number' => 'required|string',
+            'id' => 'required|integer',
+            'number_id' => 'required|string',
+            'waba_id' => 'required|string',
+            'token' => 'required|string',
+            'api_version' => 'required|string',
+            'name' => 'required|string',
+            'status' => 'required|string|in:active,inactive,test',
+            'save_messages' => 'required|boolean',
+            'save_media' => 'required|boolean'
         ];
     }
 }

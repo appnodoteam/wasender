@@ -26,7 +26,7 @@ class SendOTPRequest extends FormRequest
             'destination' => 'required|string',
             'template' => 'required|string',
             'otp' => 'required|string|max:6',
-            'language' => 'nullable|string',
+            'language' => 'required|string',
         ];
     }
 }
