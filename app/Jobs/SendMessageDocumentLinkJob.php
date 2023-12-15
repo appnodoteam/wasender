@@ -23,7 +23,7 @@ class SendMessageDocumentLinkJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct( $number, $destination, $link, $caption, $filename)
+    public function __construct(Number $number, $destination, $link, $caption, $filename)
     {
         $this->number = $number;
         $this->destination = $destination;
@@ -38,7 +38,6 @@ class SendMessageDocumentLinkJob implements ShouldQueue
     public function handle(): void
     {
         $sender = new Sender();
-        $number = Number::find($this->number);
-        $sender->sendDocumentLink($number, $this->destination, $this->link, $this->caption, $this->filename);
+        $sender->sendDocumentLink($this->number, $this->destination, $this->link, $this->caption, $this->filename);
     }
 }

@@ -1,0 +1,737 @@
+{
+	"info": {
+		"_postman_id": "22a2843f-a592-41ed-9641-21b0c4b4dac5",
+		"name": "WA SENDER",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12707844",
+		"_collection_link": "https://baldomero.postman.co/workspace/AppNodo~75112f71-6eef-4063-8b06-d21897c521fd/collection/12707844-22a2843f-a592-41ed-9641-21b0c4b4dac5?action=share&source=collection_link&creator=12707844"
+	},
+	"item": [
+		{
+			"name": "V1",
+			"item": [
+				{
+					"name": "SEND MESSAGE Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"number\":\"{{NUMBER}}\",\n    \"message\":\"Hay que guardar el numero y ya\",\n    \"destination\":\"{{DESTINATION}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/v1/send-text",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"v1",
+								"send-text"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEND MESSAGE TEMPLATE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"number\":\"{{NUMBER}}\",\n    \"destination\":\"{{DESTINATION}}\",\n    \"template\":\"hello_world\",\n    \"language\":\"en_US\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/v1/send-template",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"v1",
+								"send-template"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEND MESSAGE TEMPLATE Copy 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"number\":\"{{NUMBER}}\",\n    \"destination\":\"{{DESTINATION}}\",\n    \"template\":\"personal\",\n    \"language\":\"es\",\n    \"params\":[\"juan\", \"4564\", \"44\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/v1/send-template",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"v1",
+								"send-template"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEND MESSAGE TEMPLATE Auth",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"number\":\"{{NUMBER}}\",\n    \"destination\":\"{{DESTINATION}}\",\n    \"template\":\"auth\",\n    \"language\":\"es\",\n    \"otp\":\"156541\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/v1/send-otp",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"v1",
+								"send-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEND MESSAGE DOCUMENT UPLOAD",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "document",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "number",
+									"value": "{{NUMBER}}",
+									"type": "text"
+								},
+								{
+									"key": "destination",
+									"value": "{{DESTINATION}}",
+									"type": "text"
+								},
+								{
+									"key": "caption",
+									"value": "Factura del mes",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/v1/send-document",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"v1",
+								"send-document"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEND MESSAGE DOCUMENT LINK Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"number\":\"{{NUMBER}}\",\n    \"destination\":\"{{DESTINATION}}\",\n    \"filename\":\"Cotizacion x\",\n    \"caption\":\"Cotizacion adjunta\",\n    \"link\":\"https://...\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/v1/send-document-link",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"v1",
+								"send-document-link"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "V2",
+			"item": [
+				{
+					"name": "SEND MESSAGE TEMPLATE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"number\":\"{{NUMBER}}\",\n    \"destination\":\"{{DESTINATION}}\",\n    \"template\":\"hello_world\",\n    \"language\":\"en_US\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/v2/send-template",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"v2",
+								"send-template"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEND MESSAGE TEMPLATE Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"number\":\"{{NUMBER}}\",\n    \"destination\":\"{{DESTINATION}}\",\n    \"template\":\"personal\",\n    \"language\":\"es\",\n    \"params\":[\"juan\", \"4564\", \"Q454\", \"emprsa4564\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/v2/send-template",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"v2",
+								"send-template"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEND MESSAGE TEMPLATE Auth",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"number\":\"{{NUMBER}}\",\n    \"destination\":\"{{DESTINATION}}\",\n    \"template\":\"auth\",\n    \"language\":\"es\",\n    \"otp\":\"156541\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/v2/send-otp",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"v2",
+								"send-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEND MESSAGE DOCUMENT UPLOAD",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "document",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "number",
+									"value": "{{NUMBER}}",
+									"type": "text"
+								},
+								{
+									"key": "destination",
+									"value": "{{DESTINATION}}",
+									"type": "text"
+								},
+								{
+									"key": "caption",
+									"value": "Factura del mes",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/v2/send-document",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"v2",
+								"send-document"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SEND MESSAGE DOCUMENT LINK",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"number\":\"{{NUMBER}}\",\n    \"destination\":\"{{DESTINATION}}\",\n    \"filename\":\"Cotizacion x\",\n    \"caption\":\"Cotizacion adjunta\",\n    \"link\":\"https://...\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_BASE}}/v2/send-document-link",
+							"host": [
+								"{{URL_BASE}}"
+							],
+							"path": [
+								"v2",
+								"send-document-link"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SEND MESSAGE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"number\":\"{{NUMBER}}\",\n    \"message\":\"Hay que guardar el numero y ya\",\n    \"destination\":\"{{DESTINATION}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/v2/send-text",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"v2",
+						"send-text"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"admin@admin.com\",\n    \"password\": \" 92enQGN3852y\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/login",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REGISTER",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"admin@admin.com\",\n    \"password\": \" 92enQGN3852y\",\n    \"name\":\"Admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/register",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RECUPERAR CONTRASEÑA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"admin@admin.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/forgot-password",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"forgot-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NUMBERS",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL_BASE}}/v2/numbers",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"v2",
+						"numbers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE NUMBER",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 156153211,\n    \"number_id\":\"156151321\",\n    \"waba_id\":\"651651651\",\n    \"token\":\"alsdjflkajsdlfjaslñdfkjasñlkdfjalskjdfaskjdflaskjdf\",\n    \"api_version\":\"v17.0\",\n    \"name\":\"alias 1\",\n    \"status\":\"active\",\n    \"save_messages\":true,\n    \"save_media\":false\n}"
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/v2/numbers",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"v2",
+						"numbers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE NUMBER Copy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"number_id\":\"156151321\",\n    \"waba_id\":\"651651651\",\n    \"token\":\"alsdjflkajsdlfjaslñdfkjasñlkdfjalskjdfaskjdflaskjdf\",\n    \"api_version\":\"v17.0\",\n    \"name\":\"alias 1\",\n    \"status\":\"active\",\n    \"save_messages\":true,\n    \"save_media\":false\n}"
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/v2/numbers/156153211",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"v2",
+						"numbers",
+						"156153211"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE NUMBER Copy 2",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 156153211,\n    \"number_id\":\"156151321\",\n    \"waba_id\":\"651651651\",\n    \"token\":\"alsdjflkajsdlfjaslñdfkjasñlkdfjalskjdfaskjdflaskjdf\",\n    \"api_version\":\"v17.0\",\n    \"name\":\"alias 1\",\n    \"status\":\"active\",\n    \"save_messages\":true,\n    \"save_media\":false\n}"
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/v2/numbers/156153211",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"v2",
+						"numbers",
+						"156153211"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{accessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL_BASE",
+			"value": "http://wasender.test/api",
+			"type": "string"
+		},
+		{
+			"key": "NUMBER",
+			"value": "15550305196",
+			"type": "string"
+		},
+		{
+			"key": "DESTINATION",
+			"value": "50231784567",
+			"type": "string"
+		}
+	]
+}

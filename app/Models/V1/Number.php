@@ -31,6 +31,20 @@ class Number extends Model
         'save_media' => 'boolean',
     ];
 
+    protected $hidden = [
+        "token",
+        "number_id",
+        "waba_id",
+        "user_id",
+        "status",
+        "save_messages",
+        "save_media",
+        "api_version",
+        "created_at",
+        "updated_at",
+        "deleted_at"
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -8,6 +8,7 @@ use App\Http\Requests\StoreNumberRequest;
 use App\Http\Requests\UpdateNumberRequest;
 use App\Jobs\SendMessageTextJob;
 use App\Models\V1\Number;
+use Illuminate\Support\Facades\DB;
 
 class NumberController extends Controller
 {
@@ -16,7 +17,7 @@ class NumberController extends Controller
      */
     public function index()
     {
-        return Number::paginate();
+        return auth()->user()->numbers()->paginate(10);
     }
 
     /**
@@ -24,13 +25,23 @@ class NumberController extends Controller
      */
     public function store(StoreNumberRequest $request)
     {
-
-
-        SendMessageTextJob::dispatch($request->number, $request->destination, $request->message);
-
-        return response()->json([
-            'message' => 'Message added to queue'
-        ]);
+        DB::beginTransaction();
+        try{
+            $user = auth()->user();
+            $user->numbers()->create($request->validated());
+        } catch (\Exception $e){
+            DB::rollBack();
+            return array(
+                "message" => "Error al guardar el número",
+                "code" => 400,
+                "error" => $e->getCode() == 23000 ? "El número ya existe" : $e->getMessage()
+            );
+        }
+        DB::commit();
+        return array(
+            "message" => "Número guardado correctamente",
+            "code" => 201
+        );
 
     }
 
@@ -45,16 +56,50 @@ class NumberController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNumberRequest $request, Number $number)
+    public function update(UpdateNumberRequest $request, $number)
     {
-        //
+        $user = auth()->user();
+        DB::beginTransaction();
+        try{
+            $numberResult = $user->numbers()->findOrfail($number);
+            $numberResult->update($request->validated());
+        } catch (\Exception $e){
+            DB::rollBack();
+            return array(
+                "message" => "Error al actualizar el número",
+                "code" => 400,
+                "error" => $e->getCode() == 23000 ? "El número ya existe" : $e->getMessage()
+            );
+        }
+        DB::commit();
+        return array(
+            "message" => "Número actualizado correctamente",
+            "code" => 200
+        );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Number $number)
+    public function destroy($number)
     {
-        //
+        $user = auth()->user();
+        DB::beginTransaction();
+        try{
+            $numberResult = $user->numbers()->findOrfail($number);
+            $numberResult->delete();
+        } catch (\Exception $e){
+            DB::rollBack();
+            return array(
+                "message" => "Error al eliminar el número",
+                "code" => 400,
+                "error" => $e->getMessage()
+            );
+        }
+        DB::commit();
+        return array(
+            "message" => "Número eliminado correctamente",
+            "code" => 200
+        );
     }
 }

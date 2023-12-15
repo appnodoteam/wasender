@@ -11,7 +11,7 @@ class UpdateNumberRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdateNumberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'number_id' => 'string',
+            'waba_id' => 'string',
+            'token' => 'string',
+            'api_version' => 'string',
+            'name' => 'string',
+            'status' => 'string|in:active,inactive,test',
+            'save_messages' => 'boolean',
+            'save_media' => 'boolean'
         ];
     }
 }

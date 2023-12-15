@@ -24,7 +24,7 @@ class SendMessageOTPJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(string $number, string $destination, string $template, string $lang = 'en_US', $otp = [])
+    public function __construct(Number $number, string $destination, string $template, string $lang = 'en_US', $otp = [])
     {
         $this->number = $number;
         $this->destination = $destination;
@@ -62,7 +62,6 @@ class SendMessageOTPJob implements ShouldQueue
         ];
 
         $sender = new Sender();
-        $number = Number::find($this->number);
-        $sender->sendTemplate($number, $this->destination, $this->template, $this->lang, $components);
+        $sender->sendTemplate($this->number, $this->destination, $this->template, $this->lang, $components);
     }
 }
