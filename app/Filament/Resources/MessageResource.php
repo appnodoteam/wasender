@@ -73,6 +73,8 @@ class MessageResource extends Resource
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
-            ]);
+            ])->whereIn('number_id', function ($query) {
+                $query->select('id')->from('numbers')->where('user_id', auth()->id());
+            });
     }
 }

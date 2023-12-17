@@ -31,6 +31,7 @@ Route::group(["prefix"=> "v1", "middleware"=> "auth:sanctum"], function(){
     Route::post("send-document", [\App\Http\Controllers\V1\Api\SendMessagesController::class, "sendDocument"]);
     Route::post("send-document-link", [\App\Http\Controllers\V1\Api\SendMessagesController::class, "sendDocumentLink"]);
     Route::post("send-otp", [\App\Http\Controllers\V1\Api\SendMessagesController::class, "sendOTP"]);
+    Route::post("webhook", [\App\Http\Controllers\V2\Api\WebhookController::class, "webhook"]);
 });
 
 Route::group(["prefix"=> "v2", "middleware"=> "auth:sanctum"], function(){
@@ -41,4 +42,6 @@ Route::group(["prefix"=> "v2", "middleware"=> "auth:sanctum"], function(){
     Route::post("send-document", [\App\Http\Controllers\V2\Api\SendMessagesController::class, "sendDocument"]);
     Route::post("send-document-link", [\App\Http\Controllers\V2\Api\SendMessagesController::class, "sendDocumentLink"]);
     Route::post("send-otp", [\App\Http\Controllers\V2\Api\SendMessagesController::class, "sendOTP"]);
+
 });
+Route::post("/{number}/webhook", [\App\Http\Controllers\V2\Api\WebhookController::class, "webhook"]);
