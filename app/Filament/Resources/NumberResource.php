@@ -86,6 +86,11 @@ class NumberResource extends Resource
                     ->label(__('Token Permanente'))
                     ->placeholder(__('Permanent Token')),
 
+                Forms\Components\Textarea::make('webhook_verify_token')
+                    ->columnSpan(3)
+                    ->label(__('Webhook Verify Token'))
+                    ->placeholder(__('Webhook Verify Token')),
+
 
             ]);
     }
@@ -157,6 +162,6 @@ class NumberResource extends Resource
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
-            ]);
+            ])->where('user_id', auth()->id());
     }
 }

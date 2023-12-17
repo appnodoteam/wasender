@@ -23,7 +23,8 @@ class Number extends Model
         'save_messages',
         'save_media',
         'name',
-        'api_version'
+        'api_version',
+        'webhook_verify_token',
     ];
 
     protected $casts = [
@@ -32,18 +33,12 @@ class Number extends Model
     ];
 
     protected $hidden = [
-        "token",
-        "number_id",
-        "waba_id",
-        "user_id",
-        "status",
-        "save_messages",
-        "save_media",
-        "api_version",
         "created_at",
         "updated_at",
-        "deleted_at"
+        "deleted_at",
     ];
+
+
 
     public function user()
     {

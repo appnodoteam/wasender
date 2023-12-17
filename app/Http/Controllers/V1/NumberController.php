@@ -17,7 +17,11 @@ class NumberController extends Controller
      */
     public function index()
     {
-        return auth()->user()->numbers()->paginate(10);
+        return auth()
+            ->user()
+            ->numbers()
+            ->select("id","name")
+            ->paginate(10);
     }
 
     /**
