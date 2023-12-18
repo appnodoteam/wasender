@@ -23,8 +23,9 @@ class Message extends Model
         "response" => "array",
     ];
 
-    public function number()
+    public function numbers()
     {
         return $this->belongsTo(Number::class);
     }
+
 }

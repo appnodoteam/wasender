@@ -93,8 +93,17 @@ class Sender
             $request = new Request($method, $url, $headers, $data);
             $response = $client->sendAsync($request)->wait();
             $res = $response->getBody()->getContents();
-
+            $code = $response->getStatusCode();
             $xdata = json_decode($data, true);
+            if($code != 200) {
+                Log::error("Error sending message", [
+                    'number' => $number->id,
+                    'destination' => $xdata['to'],
+                    'text' => $text,
+                    'code' => $code,
+                    'response' => $res,
+                ]);
+            }
 
             $m = [
                 'message' => $text??"--empty--",
@@ -111,7 +120,6 @@ class Sender
 
         } catch (\Exception $e) {
             Log::error($e);
-
         }
 
     }

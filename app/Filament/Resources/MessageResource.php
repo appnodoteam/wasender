@@ -24,6 +24,26 @@ class MessageResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('message')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('destination')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Select::make('number_id')
+                    ->required()
+                    ->searchable(),
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'sent' => 'Sent',
+                        'failed' => 'Failed',
+                    ])
+                    ->required()
+                    ->searchable(),
+                Forms\Components\Textarea::make('response')
+                    ->required()
+                    ->maxLength(255),
 
             ]);
     }
@@ -32,14 +52,30 @@ class MessageResource extends Resource
     {
         return $table
             ->columns([
-
+                Tables\Columns\TextColumn::make('number_id')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('destination')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('message')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -53,8 +89,7 @@ class MessageResource extends Resource
     public static function getRelations(): array
     {
         return [
-            NumberRelationManager::class,
-            MessageNumberRelationManager::class
+            NumberRelationManager::class
         ];
     }
 
@@ -62,9 +97,8 @@ class MessageResource extends Resource
     {
         return [
             'index' => Pages\ListMessages::route('/'),
-            'create' => Pages\CreateMessage::route('/create'),
+            'create' => Pages\SendMessage::route('/create'),
             'view' => Pages\ViewMessage::route('/{record}'),
-            'edit' => Pages\EditMessage::route('/{record}/edit'),
         ];
     }
 

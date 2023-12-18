@@ -76,11 +76,6 @@ class NumberResource extends Resource
                     ->label(__('Guardar mensajes'))
                     ->default(false),
 
-                Forms\Components\Toggle::make('save_media')
-                    ->label(__('Guardar multimedia/archivos'))
-                    ->default(false),
-
-
                 Forms\Components\Textarea::make('token')
                     ->columnSpan(3)
                     ->label(__('Token Permanente'))
@@ -99,6 +94,7 @@ class NumberResource extends Resource
     {
         return $table
             ->columns([
+
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->label(__('Nombre'))
@@ -119,17 +115,20 @@ class NumberResource extends Resource
                     ->label(__('Guardar mensajes'))
                     ->sortable(),
 
-                Tables\Columns\ToggleColumn::make('save_media')
-                    ->label(__('Guardar archivos'))
-                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\Action::make('send')
+                    ->label(__('Enviar mensaje'))
+                    ->icon('monoicon-message')
+                    ->action(function (Number $number) {
+                        return redirect()->route('filament.resources.numbers.send', $number);
+                    }),
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-            ])
+                Tables\Actions\EditAction::make()]
+            )
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

@@ -18,9 +18,19 @@ class MessagesRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id')
+                Forms\Components\TextInput::make('number_id')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('destination')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('message')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('response')
+                    ->required()
+                    ->maxLength(255),
+
             ]);
     }
 
@@ -29,16 +39,32 @@ class MessagesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('id')
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
+                Tables\Columns\TextColumn::make('number_id')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('destination')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('message')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
